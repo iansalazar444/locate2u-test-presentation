@@ -12,23 +12,22 @@ namespace Calculator.Tests
 {
     public class CalculatorAppTests
     {
-        [Fact]
-        public async Task Divide_WhenValidValuesPassed_ReturnResult()
+        [Theory]
+        [InlineData(25.0, 5.0, 5.0)]
+        [InlineData(10.0, 3.0, 3.33)]
+        [InlineData(-10.0, 3.0, -3.33)]
+        public async Task Divide_WhenValidValuesPassed_ReturnResult(double dividend, double divisor, double expectedResult)
         {
             // Arrange
             var logger = Substitute.For<ILogger<CalculatorApp>>();
             var mockCache = Substitute.For<ICalculatorResultCache>();
             var sut = new CalculatorApp(logger, mockCache);
 
-            var dividend = 25.0;
-            var divisor = 5.0;
-            var expectedResult = 5.0;
-
             // Act
             var result = await sut.Divide(dividend, divisor);
             
             // Assert
-            Assert.True(expectedResult == result);
+            Assert.Equal(expectedResult, result);
         }
 
         [Fact]
