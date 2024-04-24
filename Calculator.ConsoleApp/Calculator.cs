@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Calculator.ConsoleApp
 {
-    public class Calculator
+    public interface ICalculatorApp
     {
+        Task<float> Divide(double dividend, double divisor);
+    }
+    public class CalculatorApp : ICalculatorApp
+    {
+        public Task<float> Divide(double dividend, double divisor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
