@@ -17,7 +17,8 @@ namespace Calculator.Tests
         {
             // Arrange
             var logger = Substitute.For<ILogger<CalculatorApp>>();
-            var sut = new CalculatorApp(logger);
+            var mockCache = Substitute.For<ICalculatorResultCache>();
+            var sut = new CalculatorApp(logger, mockCache);
 
             var dividend = 25.0;
             var divisor = 5.0;
@@ -28,6 +29,22 @@ namespace Calculator.Tests
             
             // Assert
             Assert.True(expectedResult == result);
+        }
+
+        [Fact]
+        public async Task Divide_WhenValidValuesPassed_StoreResultCache()
+        {
+            // Arrange
+            var logger = Substitute.For<ILogger<CalculatorApp>>();
+            var mockCache = Substitute.For<ICalculatorResultCache>();
+
+            var sut = new CalculatorApp(logger, mockCache);
+
+
+            // Act
+            await sut.Divide(1.0, 1.0);
+
+            await mockCache.Received(1).Execute(Arg.Any<double>());
         }
     }
 }
