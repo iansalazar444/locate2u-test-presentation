@@ -28,7 +28,7 @@ namespace Calculator.ConsoleApp
         public Task<double> Divide(double dividend, double divisor)
         {
             _logger.LogInformation($"Divide() called with dividend {dividend} divisor {divisor}");
-            if ( dividend == 0 )
+            if ( divisor == 0 )
             {
                 throw new DivideByZeroException();
             }

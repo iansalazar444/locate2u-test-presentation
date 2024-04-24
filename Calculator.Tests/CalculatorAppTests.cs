@@ -47,6 +47,7 @@ namespace Calculator.Tests
             await mockCache.Received(1).Execute(Arg.Any<double>());
         }
 
+        [Fact]
         public async Task Divide_WhenDivisorIsZero_ThrowDivisionByZeroExceDivideByZeroException()
         {
             var logger = Substitute.For<ILogger<CalculatorApp>>();
