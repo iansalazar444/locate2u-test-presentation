@@ -1,5 +1,6 @@
 ﻿using Calculator.ConsoleApp;
 using Castle.Core.Logging;
+using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using System;
@@ -25,9 +26,10 @@ namespace Calculator.Tests
 
             // Act
             var result = await sut.Divide(dividend, divisor);
-            
+
             // Assert
-            Assert.Equal(expectedResult, result);
+            // Assert.Equal(expectedResult, result);
+            result.Should().Be(expectedResult);
         }
 
         [Fact]
@@ -58,7 +60,8 @@ namespace Calculator.Tests
             var exception = await Record.ExceptionAsync(async () => await sut.Divide(1.0, 0));
 
             // Assert
-            Assert.IsType<DivideByZeroException>(exception);
+            //Assert.IsType<DivideByZeroException>(exception);
+            exception.Should().BeOfType<DivideByZeroException>();
         }
     }
 }
