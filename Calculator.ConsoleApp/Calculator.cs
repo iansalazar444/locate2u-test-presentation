@@ -28,6 +28,10 @@ namespace Calculator.ConsoleApp
         public Task<double> Divide(double dividend, double divisor)
         {
             _logger.LogInformation($"Divide() called with dividend {dividend} divisor {divisor}");
+            if ( dividend == 0 )
+            {
+                throw new DivideByZeroException();
+            }
             var result = dividend / divisor;
             _cache.Execute(result);
             return Task.FromResult(result);
