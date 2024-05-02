@@ -7,11 +7,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.ConsoleApp
 {
-    public interface ICalculatorResultCache
-    {
-        Task Execute(decimal result);
-    }
-    public class CalculatorResultCache: ICalculatorResultCache
+    public class CalculatorResultCache
     {
         private readonly ILogger<CalculatorResultCache> _logger;
 
